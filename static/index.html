@@ -3,24 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppZap</title>
+    <title>AppZap Process Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AppZap Process Manager</h1>
-    <table id="proc-table">
-        <thead>
-            <tr>
-                <th>PID</th>
-                <th>Name</th>
-                <th>CPU %</th>
-                <th>MEM %</th>
-                <th>User</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <header>
+        <h1>AppZap Process Manager</h1>
+    </header>
+
+    <main>
+        <section id="controls">
+            <button id="refresh-processes-btn">Refresh Processes</button>
+            <button id="open-kill-list-modal-btn">Manage Kill List</button>
+            <button id="trigger-kill-loop-btn">Run Kill Loop Check</button>
+        </section>
+
+        <section id="process-viewer">
+            <h2>Running Processes</h2>
+            <div id="process-table-container">
+                <table id="process-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>PID</th>
+                            <th>User</th>
+                            <th>CPU %</th>
+                            <th>Memory %</th>
+                            <th>Net I/O (In/Out KB)</th>
+                            <th>Parent PID</th>
+                            <th>Command Line</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="process-list-body">
+                        <!-- Process data will be populated here by JavaScript -->
+                        <tr><td colspan="9">Loading processes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="process-status-message"></div> <!-- For messages like errors or loading -->
+        </section>
+
+        <section id="kill-loop-status-section">
+            <h2>Kill Loop Check Status</h2>
+            <div id="kill-loop-status-output">
+                <!-- Status from kill_loop_check will appear here -->
+            </div>
+        </section>
+
+        <!-- Modal for Managing Kill List -->
+        <div id="kill-list-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Manage Kill List</h2>
+                    <span class="close-button" id="close-kill-list-modal-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Processes in this list will be targeted by the "Kill Loop Check". PIDs for processes that no longer exist are automatically removed during the check.</p>
+                    <div id="kill-list-table-container">
+                        <table id="kill-list-table">
+                            <thead>
+                                <tr>
+                                    <th>PID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kill-list-body">
+                                <!-- Kill list PIDs will be populated here -->
+                                <tr><td colspan="2">Loading kill list...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="kill-list-status-message"></div> <!-- For messages like errors or loading kill list -->
+                </div>
+                <div class="modal-footer">
+                    <p>Add PIDs to this list via the "Add to Kill List" button in the main process table.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; AppZap Process Manager</p>
+    </footer>
+
     <script src="app.js"></script>
 </body>
 </html>
