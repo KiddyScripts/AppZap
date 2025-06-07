@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppZap Process Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>AppZap Process Manager</h1>
+
+    <div id="global-status-messages" style="margin-bottom: 15px; padding: 10px; border-radius: 5px; display: none;"></div>
+
+    <div id="controls">
+        <button id="refresh-data-btn">Refresh Data</button>
+        <button id="manage-kill-list-btn">Manage Kill List</button>
+    </div>
+
+    <h2>Process List</h2>
+    <div id="process-table-container">
+        <!-- Process table will be rendered here by JavaScript -->
+        <p>Loading process data...</p>
+    </div>
+
+    <h2>Network Statistics</h2>
+    <div id="network-stats-container">
+        <!-- Network stats will be rendered here -->
+        <p>Loading network data...</p>
+    </div>
+
+    <!-- Modal or section for Kill List Management -->
+    <div id="kill-list-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" id="close-kill-list-modal-btn">&times;</span>
+            <h3>Kill List Management</h3>
+            <div id="kill-list-current">
+                <h4>Current Kill List PIDs:</h4>
+                <ul id="current-kill-list-ul">
+                    <!-- PIDs will be listed here -->
+                </ul>
+            </div>
+            <div id="kill-list-actions">
+                <h4>Add/Remove PID:</h4>
+                <input type="number" id="kill-list-pid-input" placeholder="Enter PID">
+                <button id="add-to-kill-list-btn">Add PID</button>
+                <button id="remove-from-kill-list-btn">Remove PID</button>
+            </div>
+            <div id="kill-list-status">
+                <!-- Status messages for add/remove operations -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
