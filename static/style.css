@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#proc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#proc-table th, #proc-table td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+}
+
+#proc-table th {
+    background-color: #f0f0f0;
+}
+
+button.kill {
+    color: red;
+}
