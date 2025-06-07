@@ -1,14 +1,23 @@
 #!/usr/bin/env python3
 """CGI script providing process information and control endpoints."""
 
-import cgi
-import cgitb
+import urllib.parse
 import json
 import os
 import psutil
 from pathlib import Path
 
-cgitb.enable()  # for debugging
+
+class SimpleForm:
+    """Minimal replacement for deprecated ``cgi.FieldStorage``."""
+
+    def __init__(self):
+        qs = os.environ.get("QUERY_STRING", "")
+        # ``parse_qs`` returns lists of values; we only need the first
+        self.data = {k: v[0] for k, v in urllib.parse.parse_qs(qs).items()}
+
+    def getfirst(self, key, default=None):
+        return self.data.get(key, default)
 
 KILL_LIST_PATH = Path(__file__).with_name('kill_list.json')
 
@@ -92,7 +101,7 @@ def handle_action(action, form):
 
 
 def main():
-    form = cgi.FieldStorage()
+    form = SimpleForm()
     action = form.getfirst('action', 'list')
     result = handle_action(action, form)
     print('Content-Type: application/json\n')
